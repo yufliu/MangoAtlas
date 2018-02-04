@@ -57,15 +57,16 @@ var app = {
 };
 
 app.initialize();
+var centerOnLocation = true; //Editted
 var image;
 var venuemap;
 var groundOverlay = null;
-var blueDotVisible = false;
+var blueDotVisible = false; //notH
 var cordovaExample = {
   watchId : null,
   regionWatchId : null,
   marker : null,
-  accuracyCircle : null, //----
+  accuracyCircle : null, //notH
   retina : window.devicePixelRatio > 1 ? true : false,
 
   // Configures IndoorAtlas SDK with API Key and Secret
@@ -122,7 +123,35 @@ var cordovaExample = {
       */
     catch(error) {alert(error)};
   },
+  //-------------------------------------------------------------
+  setPosition: function(options) {
+    // Check if the floorplan is set
+    if (IA_FLOORPLAN_ID != "") {
 
+      //alert("Setting location with floorplan ID: " + IA_FLOORPLAN_ID);
+
+      try {
+        SpinnerPlugin.activityStart('Setting location');
+        var win = function() {
+          SpinnerPlugin.activityStop();
+          cordovaExample.startRegionWatch();
+        };
+        var fail = function(error) {
+          SpinnerPlugin.activityStop();
+          //alert(error.message);
+        };
+        IndoorAtlas.setPosition(win, fail, options);
+      }
+      catch(error) {
+        //alert(error);
+      }
+    } else {
+      //alert("Floorplan ID is not set");
+    }
+  },
+
+
+    //-------------------------------------------------------------
   // Starts positioning the user in the given floorplan area
   startPositioning: function() {
     SpinnerPlugin.activityStart('Move around to get a location');
@@ -134,6 +163,7 @@ var cordovaExample = {
     cordovaExample.startRegionWatch();
   },
 
+//============================
   getTraceID: function() {
     // onSuccess Callback
     function onSuccess(data) {
@@ -148,7 +178,7 @@ var cordovaExample = {
 
     IndoorAtlas.getTraceId(onSuccess, onError);
   },
-
+//=========================TAKEN OUT
   // Fetches the current location
   getLocationCall: function() {
     SpinnerPlugin.activityStart('Fetching location. Move around');
@@ -159,7 +189,7 @@ var cordovaExample = {
   stopPositioning: function() {
     IndoorAtlas.clearWatch(this.watchId);
     cordovaExample.stopRegionWatch();
-    if (groundOverlay != null) {
+    /*if (groundOverlay != null) {
       groundOverlay.setMap(null);
     }
     if (marker != null) {
@@ -168,7 +198,7 @@ var cordovaExample = {
     if (accuracyCircle != null) {
       accuracyCircle.setVisible(false);
     }
-    blueDotVisible = false;
+    blueDotVisible = false; */
   },
 
   // Starts watching changes in region id
@@ -201,14 +231,18 @@ var cordovaExample = {
       strokeWeight : 1
     };
     var mapProp = {
-      center : new google.maps.LatLng(65.060848804763, 25.4410770535469),
+      center : new google.maps.LatLng(25.759974, -80.374113),
       zoom : 3,
       mapTypeId : google.maps.MapTypeId.ROADMAP,
       mapTypeControl : false,
       streetViewControl : false
     };
+
     venuemap = new google.maps.Map(document.getElementById('googleMap'), mapProp);
 
+    cordovaExample.mapOverlay({regionId: IA_FLOORPLAN_ID});
+
+//center
     accuracyCircle = new google.maps.Circle({
       strokeColor: '#1681FB',
       strokeOpacity: 0.4,
@@ -216,21 +250,40 @@ var cordovaExample = {
       fillColor: '#1681FB',
       fillOpacity: 0.4,
       map: venuemap,
-      center: new google.maps.LatLng(25.760848804763, -80.3410770535469),
+      center: new google.maps.LatLng(25.758974, -80.374117),
       radius: 1
     });
+
     var markerArr = []
 
     marker = new google.maps.Marker({
-      position : new google.maps.LatLng(25.752348804763, -80.3732770535469),
+      position : new google.maps.LatLng(25.7595574, -80.374713),
       map : venuemap,
       icon : image,
       zIndex : google.maps.Marker.MAX_ZINDEX + 1,
       optimized : false
     });
+//---------
+
+
+/*
+    var marker = [];
+    for (var i = 1; i < 150; i++) {
+      marker[i] = new google.maps.Marker({
+        position : new google.maps.LatLng(25.7595574+ (i)*.0001, -80.374713+(i)*.0001),
+        map : venuemap,
+        icon : image,
+        zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+        optimized : false
+        });
+        markerArr.push(marker[i])
+    }
+    */
+    //  markerArr.push(marker)
+//--------------
 
     marker2 = new google.maps.Marker({
-      position : new google.maps.LatLng(25.750848804763, -80.37310770535469),
+      position : new google.maps.LatLng(25.759854, -80.374911),
       map : venuemap,
       icon : image,
       zIndex : google.maps.Marker.MAX_ZINDEX + 1,
@@ -238,25 +291,146 @@ var cordovaExample = {
     });
 
     marker3 = new google.maps.Marker({
-      position : new google.maps.LatLng(25.751848804763, -80.3740770535469),
+      position : new google.maps.LatLng(25.759854, -80.374903),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+  });
+      marker4 = new google.maps.Marker({
+        position : new google.maps.LatLng(25.759854, -80.374915),
+        map : venuemap,
+        icon : image,
+        zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+        optimized : false
+    });
+    marker5 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.7603, -80.374909),
       map : venuemap,
       icon : image,
       zIndex : google.maps.Marker.MAX_ZINDEX + 1,
       optimized : false
     });
+    marker6 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.7604, -80.374904),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+    });
+    marker7 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.7603, -80.374904),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+    });
+    marker8 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.7602, -80.374904),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+    });
+    marker9 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.7601, -80.374904),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+    });
+    marker10 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.759854, -80.374930),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+  });
+  marker11 = new google.maps.Marker({
+    position : new google.maps.LatLng(25.7603, -80.374940),
+    map : venuemap,
+    icon : image,
+    zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+    optimized : false
+  });
+  marker12 = new google.maps.Marker({
+    position : new google.maps.LatLng(25.7604, -80.374937),
+    map : venuemap,
+    icon : image,
+    zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+    optimized : false
+  });
+  marker13 = new google.maps.Marker({
+    position : new google.maps.LatLng(25.7603, -80.374934),
+    map : venuemap,
+    icon : image,
+    zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+    optimized : false
+  });
+  marker14 = new google.maps.Marker({
+    position : new google.maps.LatLng(25.7602, -80.374924),
+    map : venuemap,
+    icon : image,
+    zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+    optimized : false
+  });
+  marker15 = new google.maps.Marker({
+    position : new google.maps.LatLng(25.7601, -80.374914),
+    map : venuemap,
+    icon : image,
+    zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+    optimized : false
+  });
+
     markerArr.push(marker)
     markerArr.push(marker2)
     markerArr.push(marker3)
+    markerArr.push(marker4)
+    markerArr.push(marker5)
+    markerArr.push(marker6)
+    markerArr.push(marker7)
+    markerArr.push(marker8)
+    markerArr.push(marker9)
+    markerArr.push(marker10)
+    markerArr.push(marker11)
+    markerArr.push(marker12)
+    markerArr.push(marker13)
+    markerArr.push(marker14)
+    markerArr.push(marker15)
+
     marker.setVisible(false);
     marker.setMap(venuemap);
     markerArr.foreach(marker=>{
       marker.setVisibile(false)
-      marker.setMap(venuemap)
-    })
+      marker.setMap(venuemap);
+    });
     accuracyCircle.setVisible(false);
     accuracyCircle.setMap(venuemap);
   },
 
+//**************************************************
+mapOverlay: function(position) {
+  try {
+    SpinnerPlugin.activityStart('Setting overlay');
+    var win = function(floorplan) {
+      SpinnerPlugin.activityStop();
+      // Set position and map overlay
+      cordovaExample.setMapOverlay(floorplan);
+
+    };
+    var fail = function(error) {
+      SpinnerPlugin.activityStop();
+      //alert(error.message);
+    };
+
+    // Gets the floorplan with the given region ID (floorplan ID) and then continues as specified earlier
+    IndoorAtlas.fetchFloorPlanWithId(position.regionId, win, fail);
+  }
+  catch(error) {
+    ////alert(error);
+  }
+},
+//*******************************************
   // Sets the map overlay
   setMapOverlay: function(floorplan) {
     // Needed to calculate the coordinates for floorplan that has not yet been rotated
@@ -317,9 +491,13 @@ var cordovaExample = {
 
   // Calculates length of degree of latitude and longitude according to the given latitude. Returns both of these lengths.
   calculateMetersPerLatLonDegree: function(latitude) {
+
+
+//*****************
+//This controls the radius of the mini blue circle
     var EARTH_RADIUS_METERS = 6.371e6;
-    var METERS_PER_LAT_DEGREE = EARTH_RADIUS_METERS * Math.PI / 180.0;
-    var METERS_PER_LONG_DEGREE = METERS_PER_LAT_DEGREE * Math.cos(latitude / 180.0 * Math.PI);
+    var METERS_PER_LAT_DEGREE = EARTH_RADIUS_METERS * Math.PI / 280.0;
+    var METERS_PER_LONG_DEGREE = METERS_PER_LAT_DEGREE * Math.cos(latitude / 280.0 * Math.PI);
 
     var metersPerLatLonDegree = {metersPerLatitudeDegree: METERS_PER_LAT_DEGREE, metersPerLongitudeDegree: METERS_PER_LONG_DEGREE};
     return metersPerLatLonDegree;
