@@ -65,7 +65,7 @@ var cordovaExample = {
   watchId : null,
   regionWatchId : null,
   marker : null,
-  accuracyCircle : null,
+  accuracyCircle : null, //----
   retina : window.devicePixelRatio > 1 ? true : false,
 
   // Configures IndoorAtlas SDK with API Key and Secret
@@ -103,6 +103,23 @@ var cordovaExample = {
         venuemap.setZoom(20);
       }
     }
+    /*  if (this.marker != null) {
+        this.marker.setPosition(center);
+      }
+      else {
+        this.marker = new google.maps.Marker({
+          position: center,
+          map: venuemap,
+          icon: image,
+          zIndex: google.maps.Marker.MAX_ZINDEX + 1,
+          optimized: false
+        });
+      }
+      if (centerOnLocation) {
+        venuemap.panTo(center);
+        centerOnLocation = false;
+      }
+      */
     catch(error) {alert(error)};
   },
 
@@ -199,20 +216,43 @@ var cordovaExample = {
       fillColor: '#1681FB',
       fillOpacity: 0.4,
       map: venuemap,
-      center: new google.maps.LatLng(65.060848804763, 25.4410770535469),
+      center: new google.maps.LatLng(25.760848804763, -80.3410770535469),
       radius: 1
     });
+    var markerArr = []
 
     marker = new google.maps.Marker({
-      position : new google.maps.LatLng(65.060848804763, 25.4410770535469),
+      position : new google.maps.LatLng(25.752348804763, -80.3732770535469),
       map : venuemap,
       icon : image,
       zIndex : google.maps.Marker.MAX_ZINDEX + 1,
       optimized : false
     });
 
+    marker2 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.750848804763, -80.37310770535469),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+    });
+
+    marker3 = new google.maps.Marker({
+      position : new google.maps.LatLng(25.751848804763, -80.3740770535469),
+      map : venuemap,
+      icon : image,
+      zIndex : google.maps.Marker.MAX_ZINDEX + 1,
+      optimized : false
+    });
+    markerArr.push(marker)
+    markerArr.push(marker2)
+    markerArr.push(marker3)
     marker.setVisible(false);
     marker.setMap(venuemap);
+    markerArr.foreach(marker=>{
+      marker.setVisibile(false)
+      marker.setMap(venuemap)
+    })
     accuracyCircle.setVisible(false);
     accuracyCircle.setMap(venuemap);
   },
