@@ -1,0 +1,55 @@
+{
+  "_from": "git+https://github.com/IndoorAtlas/cordova-plugin.git",
+  "_id": "cordova-plugin-indooratlas@1.6.0",
+  "_inBundle": false,
+  "_location": "/cordova-plugin-indooratlas",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/IndoorAtlas/cordova-plugin.git",
+    "rawSpec": "https://github.com/IndoorAtlas/cordova-plugin.git",
+    "saveSpec": "git+https://github.com/IndoorAtlas/cordova-plugin.git",
+    "fetchSpec": "https://github.com/IndoorAtlas/cordova-plugin.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/IndoorAtlas/cordova-plugin.git#bc4c5de17f0115d3ca7a857abc160c4e9b07304b",
+  "_spec": "https://github.com/IndoorAtlas/cordova-plugin.git",
+  "_where": "C:\\Users\\yuliu\\sdk-cordova-examples\\CordovaExamples",
+  "author": {
+    "name": "IndoorAtlas"
+  },
+  "bugs": {
+    "url": "https://github.com/IndoorAtlas/cordova-plugin/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-indooratlas",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova plugin using IndoorAtlas SDK.",
+  "homepage": "https://github.com/IndoorAtlas/cordova-plugin#readme",
+  "keywords": [
+    "cordova",
+    "IndoorAtlas",
+    "geolocation",
+    "ecosystem:cordova",
+    "cordova-android",
+    "wayfinding",
+    "indoor positioning"
+  ],
+  "license": "Apache 2.0",
+  "name": "cordova-plugin-indooratlas",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IndoorAtlas/cordova-plugin.git"
+  },
+  "version": "1.6.0"
+}

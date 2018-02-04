@@ -1,0 +1,26 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-spinner": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-spinner@~1.1.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-indooratlas": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/IndoorAtlas/cordova-plugin.git"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}
