@@ -23,16 +23,22 @@ Do the following in a terminal: (Command Line, bash, powershell)
 5.  cordova build
     cordova run
     
-# Other instructions:
-Make sure to download the following:
+# Downloads:
+Make sure to download the following: https://www.youtube.com/watch?v=CDY1fRZycGk&t=961s
   Java
   Android Studio
+  nodejs  https://nodejs.org/en/
+  Cordova: npm install cordova -g
+    cordova create MyApp ______
   
-# Enabling GPS on Android Emulator:
+  
+  After you run cordova and press start: 
+# Enabling GPS on Android Emulator: https://www.youtube.com/watch?v=Bw9X2lBfESc 
   1. Open up terminal within Android Studio
   2. Type in: telnet localhost 5554
   3. Type in: geo fix (longitude) (latitude)
         Example: geo fix -80.2345 25.3214
+  resources: https://developer.android.com/studio/run/emulator-console.html
         
-        
-  
+Notes:
+decreasing -80.23 to -80.41 makes it go more left (longitude)
